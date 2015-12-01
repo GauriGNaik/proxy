@@ -10,7 +10,7 @@
       git: repo={{ project_repo }} dest={{ project_root }} accept_hostkey=true
       
     - name: install npm
-      npm: path=/var/projects/example
+      npm: path=/var/projects/proxy
       
     - name: Start Redis
       service: name=redis-server state=started
