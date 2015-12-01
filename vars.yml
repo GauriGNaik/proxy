@@ -1,7 +1,7 @@
 ---
-project_name: example
-project_root: /var/projects/example
-project_repo: git@github.com:GauriGNaik/example.git
+project_name: proxy
+project_root: /var/projects/proxy
+project_repo: git@github.com:GauriGNaik/proxy.git
 ver: 1.0.0
 system_packages:
   - build-essential
