@@ -3,7 +3,7 @@ var app = express()
 var http = require('http')
 var httpProxy = require('http-proxy')
 var sioc = require('socket.io-client');
-var status = 'false';
+var indicator = false;
 
 var proxy = httpProxy.createProxyServer({});
 var count = 1;
@@ -14,9 +14,9 @@ var canary = process.argv[3];
 var socket = sioc('http://'+canary+':3003');
 
 socket.on("heartbeat", function(client) {
-    status = client.status;
-    console.log("Status is "+status);
-    if(status==='true') {
+    indicator = client.status;
+    console.log("Status is "+indicator);
+    if(indicator==true) {
        console.log("Canary Server Failed.");
     }
 });
@@ -24,7 +24,7 @@ socket.on("heartbeat", function(client) {
 //PROXY SERVER
 var server = http.createServer(function(req, res) {
    
-        if((count % 4 == 0) && (status == 'false')) { 
+        if((count % 4 == 0) && (indicator == false)) { 
           var target = "http://" + canary + ":3002";   
           proxy.web(req, res, {target: target});
           console.log("Request forwarded to  server: http://" + canary + ":3002");
