@@ -24,7 +24,7 @@ socket.on("heartbeat", function(client) {
 //PROXY SERVER
 var server = http.createServer(function(req, res) {
    
-        if((count % 4 == 0) && (indicator == false)) { 
+        if((count % 4 == 0) && (!indicator)) { 
           var target = "http://" + canary + ":3002";   
           proxy.web(req, res, {target: target});
           console.log("Request forwarded to  server: http://" + canary + ":3002");
